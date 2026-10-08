@@ -8,7 +8,7 @@ Maintained by nop at MechanicalGirl LLC.
 - `myactuator-rmd`: `no_std` protocol encoding and decoding.
 - `myactuator-rmd-can`: SLCAN transport, transactions, and command-line interface.
 
-## Reiny 0.7 integration
+## Reiny 0.8 integration
 
 `myactuator-rmd` remains a dependency-free `no_std` protocol crate;
 `myactuator-rmd-can` remains a SLCAN transport. The CLI is a standalone
@@ -21,6 +21,12 @@ freshness and safe stop/torque behavior. Complete that behavior on
 `Cloudy::shutdown()` before dropping the transport; a stop acknowledgement is
 not a completed hardware shutdown. Preserve the full module namespace as
 message provenance rather than using a CAN identifier as a publisher identity.
+
+Use published `reiny = "0.8.0"` and `reiny-build = "0.8.0"` in the adapter.
+Its runtime definition and schema catalog use `version: 2`. Declare the
+executable, build and endpoint policies in the adapter's own `main.yaml`:
+input `replay`/`buffer` and output `qos`/`retention`. Callers reuse it through
+`source` and wire inputs with `from`, without repeating child outputs.
 
 ## Verification
 
